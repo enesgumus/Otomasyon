@@ -7,8 +7,8 @@ import streamlit as st
 def send_email(subject, body, recipient_list):
     smtp_server = "smtp.gmail.com"
     smtp_port = 587
-    sender_email = "gumus.enes1247@gmail.com"
-    sender_password = "vkkt zeki vdmg ijtb"
+    sender_email = ""
+    sender_password = ""
 
     try:
         with smtplib.SMTP(smtp_server, smtp_port) as server:
