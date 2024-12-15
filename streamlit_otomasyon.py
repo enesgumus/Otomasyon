@@ -80,7 +80,7 @@ additional_note = st.text_area("Ek Açıklama", placeholder="Ek açıklama girin
 # Girdi doğrulama fonksiyonu
 def validate_inputs(sender_email, sender_password, subject, body, recipient_input, work_hours):
     errors = []
-    if not sender_email:
+    if not sender_email: 
         errors.append("Gönderici e-posta adresi boş olamaz.")
     if not sender_password:
         errors.append("Gönderici şifre boş olamaz.")
