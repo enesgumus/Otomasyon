@@ -24,7 +24,7 @@ def send_email(sender_email, sender_password, subject, body, recipient_list):
         return f"E-posta gönderiminde hata: {e}"
 
 # Streamlit arayüzü
-st.set_page_config(page_title="Log Girme Uygulaması", page_icon="📝")
+st.set_page_config(page_title="Log Girme", page_icon="📝")
 st.title("Log Paylaşım Uygulaması 📧")
 
 # Gönderici bilgilerinin giriş alanları
