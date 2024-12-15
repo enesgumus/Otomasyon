@@ -4,11 +4,9 @@ from email.mime.multipart import MIMEMultipart
 import streamlit as st
 
 # E-posta gönderme fonksiyonu
-def send_email(subject, body, recipient_list):
+def send_email(sender_email, sender_password, subject, body, recipient_list):
     smtp_server = "smtp.gmail.com"
     smtp_port = 587
-    sender_email = ""
-    sender_password = ""
 
     try:
         with smtplib.SMTP(smtp_server, smtp_port) as server:
@@ -32,6 +30,10 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+# Gönderici bilgilerinin giriş alanları
+sender_email = st.text_input("Gönderici E-posta", placeholder="Gönderici e-posta adresini girin")
+sender_password = st.text_input("Gönderici Şifre", type="password", placeholder="Gönderici e-posta şifresini girin")
+
 # Giriş alanları
 subject = st.text_input("E-posta Konusu", placeholder="Konu girin")
 selected_date = st.date_input("Log Tarihi", help="Bu tarih e-posta içeriğinde gösterilecek.")
@@ -41,8 +43,12 @@ additional_note = st.text_area("Ek Açıklama", placeholder="Ek açıklama girin
 recipient_input = st.text_area("Alıcı E-posta Adresleri", placeholder="Alıcı e-posta adreslerini virgülle ayırarak yazın")
 
 # Girdi doğrulama fonksiyonu
-def validate_inputs(subject, body, recipient_input, work_hours):
+def validate_inputs(sender_email, sender_password, subject, body, recipient_input, work_hours):
     errors = []
+    if not sender_email:
+        errors.append("Gönderici e-posta adresi boş olamaz.")
+    if not sender_password:
+        errors.append("Gönderici şifre boş olamaz.")
     if not subject:
         errors.append("E-posta konusu boş olamaz.")
     if not body:
@@ -62,11 +68,11 @@ def process_email_sending():
     full_body += f"⏳ Çalışma Saati: {work_hours} saat\n\n{body}"
     if additional_note:
         full_body += f"\n\n📝 Ek Açıklama:\n{additional_note}"
-    return send_email(subject, full_body, recipient_list)
+    return send_email(sender_email, sender_password, subject, full_body, recipient_list)
 
 # Gönderim butonu
 if st.button("Gönder"):
-    validation_errors = validate_inputs(subject, body, recipient_input, work_hours)
+    validation_errors = validate_inputs(sender_email, sender_password, subject, body, recipient_input, work_hours)
     if validation_errors:
         for error in validation_errors:
             st.error(error)
