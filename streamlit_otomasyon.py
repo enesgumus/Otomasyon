@@ -25,10 +25,6 @@ def send_email(sender_email, sender_password, subject, body, recipient_list):
 
 # Streamlit arayüzü
 st.title("Log Paylaşım Uygulaması 📧")
-st.markdown(
-    "<h5 style='text-align: center; color: grey;'>Enes Gümüş tarafından geliştirildi</h5>",
-    unsafe_allow_html=True
-)
 
 # Gönderici bilgilerinin giriş alanları
 sender_email = st.text_input("Gönderici E-posta", placeholder="Gönderici e-posta adresini girin")
